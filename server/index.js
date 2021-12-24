@@ -24,6 +24,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/api/hello', (req, res) => {
+  res.send('Hello Client.')
+})
+
 app.post('/api/users/register', (req, res) => {
   // 회원가입 정보를 DB에 저장
   const user = new User(req.body) 
@@ -71,7 +75,7 @@ app.get('/api/users/auth', auth, (req, res) => {
 app.get('/api/users/logout', auth, (req, res) => {
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
     if(err) return res.json({ success: false, err })
-    return res.status(200).send({ sucess: true })
+    return res.status(200).send({ success: true })
   })
 })
 
